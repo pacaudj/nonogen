@@ -10,17 +10,17 @@ import (
 
 func main() {
 	if len(os.Args) < 4 {
-		fmt.Println("Usage: nonogen size source brightness (dest)")
+		fmt.Println("Usage: nonogen size brightness source (dest)")
 		os.Exit(1)
 	}
 	size, err := strconv.Atoi(os.Args[1])
 	if err != nil{
-		fmt.Println("Usage: nonogen size source brightness (dest)")
+		fmt.Println("Usage: nonogen size brightness source (dest)")
 		return
 	}
 	brightness, err := strconv.Atoi(os.Args[2])
 	if err != nil{
-		fmt.Println("Usage: nonogen size source brightness (dest)")
+		fmt.Println("Usage: nonogen size brightness source (dest)")
 		return
 	}
 	fileName := os.Args[3]
@@ -32,7 +32,10 @@ func main() {
 		destName := os.Args[4]
 		nonoToJPG(nono, destName)
 	}
-}
+	serializedNono, err := serializeNono(nono)
+	fmt.Println(serializedNono[0])
+	fmt.Println(serializedNono[1])
+	}
 
 func nonoGen(sizeY, brightness int, name string) ([][]int, error){
 	img, err := os.Open(name)
@@ -79,4 +82,33 @@ func getSqrAvgColor(x, y, size int, img image.RGBA) int{
 	}
 	avgColor = avgColor / float64(size) / float64(size)
 	return int(avgColor)
+}
+
+func serializeNono(tab [][]int) ([2][][]int, error){
+	row := make([][]int, len(tab))
+	column := make([][]int, len(tab[0]))
+	for i := range tab{
+		nbSquare := 0
+		for j := range tab[i]{
+			if tab[i][j] == 1{
+				nbSquare++
+			} else if nbSquare != 0{
+					row[i] = append(row[i], nbSquare)
+					nbSquare = 0
+			}
+		}
+	}
+	for i := range tab[0]{
+		nbSquare := 0
+		for j := range tab{
+			if tab[j][i] == 1{
+				nbSquare++
+			} else if nbSquare != 0{
+				column[i] = append(column[i], nbSquare)
+				nbSquare = 0
+			}
+		}
+	}
+	res := [2][][]int{row, column}
+	return res, nil
 }
