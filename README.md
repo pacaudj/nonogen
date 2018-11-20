@@ -1,2 +1,2 @@
 # nonogen
-online nonogramme generator
+Nononogram generator
