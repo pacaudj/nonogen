@@ -1,5 +1,6 @@
 # Go parameters
 GOCMD=go
+GOGET=$(GOCMD) get
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
@@ -19,3 +20,6 @@ clean:
 run:
 		$(GOBUILD) -o $(BINARY_NAME) -v ./...
 		./$(BINARY_NAME)
+
+deps:
+		$(GOGET) github.com/nfnt/resize
