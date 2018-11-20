@@ -15,6 +15,7 @@ test:
 clean:
 		$(GOCLEAN)
 		rm -f $(BINARY_NAME)
+		rm  ./test-output/*
 run:
 		$(GOBUILD) -o $(BINARY_NAME) -v ./...
 		./$(BINARY_NAME)

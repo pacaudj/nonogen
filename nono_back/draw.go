@@ -16,6 +16,12 @@ func DrawLine(x1, x2, y int, img image.RGBA, color color.Color) {
 	}
 }
 
+func DrawVerticalLine(y1, y2, x int, img image.RGBA, color color.Color) {
+	for ; y1 < y2; y1++ {
+		img.Set(x, y1, color)
+	}
+}
+
 func DrawRect(x, y, x2, y2 int, img image.RGBA, color color.Color) {
 	for ; y < y2; y++ {
 		DrawLine(x, x2, y, img, color)
@@ -36,17 +42,24 @@ func imgToGrayScale(originImg image.Image) *image.RGBA{
 }
 
 func nonoToJPG(nono [][]int, name string) {
+	size := 100
 	sizeY := len(nono)
 	sizeX := len(nono[0])
-	img := image.NewRGBA(image.Rect(0, 0, sizeX, sizeY))
+	img := image.NewRGBA(image.Rect(0, 0, sizeX * size, sizeY * size))
 	for y := 0; y < sizeY; y++ {
 		for x := 0; x < sizeX; x++{
 			if nono[y][x] == 1 {
-				DrawRect(x, y, x + 1, y + 1, *img, color.Black)
+				DrawRect(x * size, y * size, x + size, y + size, *img, color.Black)
 			} else {
-				DrawRect(x, y, x + 1, y + 1, *img, color.White)
+				DrawRect(x * size, y * size, x * size + size, y * size + size, *img, color.White)
 			}
 		}
+	}
+	for i := 1; i < sizeY; i++{
+		DrawLine(0, size * sizeX, i * size, *img ,color.RGBA{255, 0, 0, 1})
+	}
+	for i := 1; i < sizeX; i++{
+		DrawVerticalLine(0, size * sizeY, i * size, *img ,color.RGBA{255, 0, 0, 1})
 	}
 	jpgDraw(name, img)
 }
