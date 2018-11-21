@@ -42,7 +42,7 @@ func imgToGrayScale(originImg image.Image) *image.RGBA{
 }
 
 func nonoToJPG(nono [][]int, name string) {
-	size := 100
+	size := 10
 	sizeY := len(nono)
 	sizeX := len(nono[0])
 	img := image.NewRGBA(image.Rect(0, 0, sizeX * size, sizeY * size))

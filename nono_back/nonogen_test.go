@@ -39,12 +39,14 @@ func TestNonogen(b *testing.T){
 		{10, 30000, "test-pic/bird.jpg", "test-output/bird_10.jpg"},
 		{15, 30000, "test-pic/bird.jpg", "test-output/bird_15.jpg"},
 		{20, 30000, "test-pic/bird.jpg", "test-output/bird_20.jpg"},
-		{25, 25000, "test-pic/shosta.jpg", "test-output/shosta_1.jpg"},
-		{25, 30000, "test-pic/shosta.jpg", "test-output/shosta_2.jpg"},
-		{25, 35000, "test-pic/shosta.jpg", "test-output/shosta_3.jpg"},
-		{50, 25000, "test-pic/lion.jpg", "test-output/lion_1.jpg"},
-		{50, 30000, "test-pic/lion.jpg", "test-output/lion_2.jpg"},
-		{50, 35000, "test-pic/lion.jpg", "test-output/lion_3.jpg"},
+		{30, 25000, "test-pic/shosta.jpg", "test-output/shosta_1.jpg"},
+		{30, 30000, "test-pic/shosta.jpg", "test-output/shosta_2.jpg"},
+		{30, 35000, "test-pic/shosta.jpg", "test-output/shosta_3.jpg"},
+		{20, 30000, "test-pic/lion.jpg", "test-output/lion_1.jpg"},
+		{30, 30000, "test-pic/lion.jpg", "test-output/lion_2.jpg"},
+		{55, 30000, "test-pic/lion.jpg", "test-output/lion_3.jpg"},
+
+
 	}
 	for _, table := range tables {
 		nono, err := nonoGen(table.size, table.bright, table.name)
