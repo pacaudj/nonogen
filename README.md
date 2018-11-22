@@ -1,7 +1,8 @@
 # Nonogen
 
-Nonogen is a software that generate a nonogram puzzle from a picture.
+The goal of this project is to have a website where a user can generate a nonogram and to play it online.
 
+The website will be written in react.js and the api used to generate the nonogram is written in Go.
 You can try it yourself with your own image or simply by using the **make test** command to generate nonograms based on images from the text-pic folder
 
 ### usage :
