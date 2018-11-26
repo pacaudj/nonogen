@@ -4,7 +4,7 @@ The goal of this project is to have a website where a user can generate a nonogr
 
 The website will be written in react.js and the api used to generate the nonogram is written in Go.
 
-You can already try the nonogam generator with your own image or simply by using the **make test** command to generate nonograms based on images from the text-pic folder
+You can already try the nonogam generator located in the nono_back folder with your own image or simply by using the **make test** command to generate nonograms based on images from the text-pic folder
 
 ### usage :
 ./nonogen size brightness source (dest)
