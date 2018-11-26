@@ -1,6 +1,6 @@
 # Nonogen
 
-The goal of this project is to have a website where a user can generate a nonogram and to play it online.
+The goal of this project is to have a website where a user can generate a nonogram and play it online.
 
 The website will be written in react.js and the api used to generate the nonogram is written in Go.
 
