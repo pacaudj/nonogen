@@ -28,7 +28,7 @@ func DrawRect(x, y, x2, y2 int, img image.RGBA, color color.Color) {
 	}
 }
 
-func imgToGrayScale(originImg image.Image) *image.RGBA{
+func imgToGrayScale(originImg image.Image) *image.RGBA {
 	bounds := originImg.Bounds()
 	BWImg := image.NewRGBA(bounds)
 	for y := 0; y < bounds.Max.Y; y++ {
@@ -45,26 +45,26 @@ func nonoToJPG(nono [][]int, name string) {
 	size := 10
 	sizeY := len(nono)
 	sizeX := len(nono[0])
-	img := image.NewRGBA(image.Rect(0, 0, sizeX * size, sizeY * size))
+	img := image.NewRGBA(image.Rect(0, 0, sizeX*size, sizeY*size))
 	for y := 0; y < sizeY; y++ {
-		for x := 0; x < sizeX; x++{
+		for x := 0; x < sizeX; x++ {
 			if nono[y][x] == 1 {
-				DrawRect(x * size, y * size, x + size, y + size, *img, color.Black)
+				DrawRect(x*size, y*size, x*size+size, y*size+size, *img, color.Black)
 			} else {
-				DrawRect(x * size, y * size, x * size + size, y * size + size, *img, color.White)
+				DrawRect(x*size, y*size, x*size+size, y*size+size, *img, color.White)
 			}
 		}
 	}
-	for i := 1; i < sizeY; i++{
-		DrawLine(0, size * sizeX, i * size, *img ,color.RGBA{255, 0, 0, 1})
+	for i := 1; i < sizeY; i++ {
+		DrawLine(0, size*sizeX, i*size, *img, color.RGBA{255, 0, 0, 1})
 	}
-	for i := 1; i < sizeX; i++{
-		DrawVerticalLine(0, size * sizeY, i * size, *img ,color.RGBA{255, 0, 0, 1})
+	for i := 1; i < sizeX; i++ {
+		DrawVerticalLine(0, size*sizeY, i*size, *img, color.RGBA{255, 0, 0, 1})
 	}
 	jpgDraw(name, img)
 }
 
-func jpgDraw(name string, img image.Image){
+func jpgDraw(name string, img image.Image) {
 	var opt jpeg.Options
 	opt.Quality = 75
 	out, err := os.Create(name)
@@ -75,13 +75,13 @@ func jpgDraw(name string, img image.Image){
 	}
 }
 
-func resizeImg(originImg image.Image, size int) (image.Image, error){
+func resizeImg(originImg image.Image, size int) (image.Image, error) {
 	bounds := originImg.Bounds()
-	if size > bounds.Max.Y{
+	if size > bounds.Max.Y {
 		fmt.Println("Requested size is too big")
 		return nil, errors.New("Requested size is too big")
 	}
-	if size < 5{
+	if size < 5 {
 		fmt.Println("Requested size is too small")
 		return nil, errors.New("Requested size is too small")
 	}
