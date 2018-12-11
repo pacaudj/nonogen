@@ -6,12 +6,12 @@ import (
 	"testing"
 )
 
-func TestErrorCaseNonogen(b *testing.T){
+func TestErrorCaseNonogen(b *testing.T) {
 	tables := []struct {
-		size int
+		size   int
 		bright int
-		name string
-		test string
+		name   string
+		test   string
 	}{
 		{25, 30000, "test-pic/shosta", "File doesn't exist"},
 		{25, 30000, "test-pic/shosta.png", "Wrong file format"},
@@ -20,21 +20,21 @@ func TestErrorCaseNonogen(b *testing.T){
 	}
 	for _, table := range tables {
 		_, err := nonoGen(table.size, table.bright, table.name)
-		if err == nil{
+		if err == nil {
 			fmt.Println(table.test, ": FAILED")
 			os.Exit(1)
-		} else{
+		} else {
 			fmt.Println(table.test, ": SUCCESS")
 		}
 	}
 }
 
-func TestNonogen(b *testing.T){
+func TestNonogen(b *testing.T) {
 	tables := []struct {
-		size int
+		size   int
 		bright int
-		name string
-		dest string
+		name   string
+		dest   string
 	}{
 		{10, 30000, "test-pic/bird.jpg", "test-output/bird_10.jpg"},
 		{15, 30000, "test-pic/bird.jpg", "test-output/bird_15.jpg"},
@@ -45,14 +45,12 @@ func TestNonogen(b *testing.T){
 		{20, 30000, "test-pic/lion.jpg", "test-output/lion_1.jpg"},
 		{30, 30000, "test-pic/lion.jpg", "test-output/lion_2.jpg"},
 		{55, 30000, "test-pic/lion.jpg", "test-output/lion_3.jpg"},
-
-
 	}
 	for _, table := range tables {
 		nono, err := nonoGen(table.size, table.bright, table.name)
-		if err != nil{
+		if err != nil {
 			os.Exit(1)
-		} else{
+		} else {
 			nonoToJPG(nono, table.dest)
 			fmt.Println("Successfully generated file", table.dest)
 		}
