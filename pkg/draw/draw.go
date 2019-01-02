@@ -28,7 +28,7 @@ func DrawRect(x, y, x2, y2 int, img image.RGBA, color color.Color) {
 	}
 }
 
-func imgToGrayScale(originImg image.Image) *image.RGBA {
+func ImgToGrayScale(originImg image.Image) *image.RGBA {
 	bounds := originImg.Bounds()
 	BWImg := image.NewRGBA(bounds)
 	for y := 0; y < bounds.Max.Y; y++ {
@@ -41,7 +41,7 @@ func imgToGrayScale(originImg image.Image) *image.RGBA {
 	return BWImg
 }
 
-func nonoToJPG(nono [][]int, name string) {
+func NonoToJPG(nono [][]int, name string) {
 	size := 10
 	sizeY := len(nono)
 	sizeX := len(nono[0])
@@ -61,10 +61,10 @@ func nonoToJPG(nono [][]int, name string) {
 	for i := 1; i < sizeX; i++ {
 		DrawVerticalLine(0, size*sizeY, i*size, *img, color.RGBA{255, 0, 0, 1})
 	}
-	jpgDraw(name, img)
+	JpgDraw(name, img)
 }
 
-func jpgDraw(name string, img image.Image) {
+func JpgDraw(name string, img image.Image) {
 	var opt jpeg.Options
 	opt.Quality = 75
 	out, err := os.Create(name)
@@ -75,7 +75,7 @@ func jpgDraw(name string, img image.Image) {
 	}
 }
 
-func resizeImg(originImg image.Image, size int) (image.Image, error) {
+func ResizeImg(originImg image.Image, size int) (image.Image, error) {
 	bounds := originImg.Bounds()
 	if size > bounds.Max.Y {
 		fmt.Println("Requested size is too big")

@@ -1,6 +1,9 @@
 package solver
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/shadonovitch/nonogen/pkg/draw"
+)
 
 func isSolvable(tips [2][][]int) {
 	grid := make([][]int, len(tips[0]))
@@ -9,7 +12,7 @@ func isSolvable(tips [2][][]int) {
 	}
 	grid = mathPrefill(tips[0], len(tips[1]), grid)
 	grid = rotateGrid(mathPrefill(tips[1], len(tips[0]), rotateGrid(grid)))
-	nonoToJPG(grid, "test_solver.jpg")
+	draw.NonoToJPG(grid, "test_solver.jpg")
 }
 
 func rotateGrid(grid [][]int) [][]int {

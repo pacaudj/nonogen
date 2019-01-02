@@ -7,20 +7,26 @@ The website will be written in react.js and the api used to generate the nonogra
 You can already try the nonogam generator located in the nono_back folder with your own image or simply by using the **make test** command to generate nonograms based on images from the text-pic folder
 
 ### Build
+
 Clone the repository in your $GOPATH:  
-`$ git clone git@github.com/pacaudj/nonogen $GOPATH/src/pacaudj/nonogen`  
+```bash
+$ git clone git@github.com/pacaudj/nonogen $GOPATH/src/pacaudj/nonogen
+```
 Download dependencies:  
 ```bash
 $ cd $GOPATH/src/pacaudj/nonogen
 $ GO111MODULE=ON go mod vendor
 ```
 Build the CLI:
-```
+```bash
 $ go build cmd/nonocli/main.go -o build/nonocli
 ```
 
 ### Usage
-./nonogen size brightness source (dest)
+
+```bash
+$ ./build/nono generate --size <size> --brightness <brigthness> --input <path to input> --output <path to output>
+```
 * size define the height of the nonogram. Increasing the size increase the picture details but also the time you will need to solve it
 * brightness define the brightness at wich the program will consider if a square is black or white. You should tweak this value until you are satisfied of the result because it will greatly affect the complexity of the puzzle.
 * source is the path to the source image. Image must be unther the jpg format.

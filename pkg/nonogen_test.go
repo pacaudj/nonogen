@@ -1,7 +1,8 @@
-package main
+package pkg
 
 import (
 	"fmt"
+	"github.com/shadonovitch/nonogen/pkg/draw"
 	"os"
 	"testing"
 )
@@ -19,7 +20,7 @@ func TestErrorCaseNonogen(b *testing.T) {
 		{2, 30000, "test-pic/shosta.jpg", "Size is too small"},
 	}
 	for _, table := range tables {
-		_, err := nonoGen(table.size, table.bright, table.name)
+		_, err := Nonogen(table.size, table.bright, table.name)
 		if err == nil {
 			fmt.Println(table.test, ": FAILED")
 			os.Exit(1)
@@ -47,11 +48,11 @@ func TestNonogen(b *testing.T) {
 		{55, 30000, "test-pic/lion.jpg", "test-output/lion_3.jpg"},
 	}
 	for _, table := range tables {
-		nono, err := nonoGen(table.size, table.bright, table.name)
+		nono, err := Nonogen(table.size, table.bright, table.name)
 		if err != nil {
 			os.Exit(1)
 		} else {
-			nonoToJPG(nono, table.dest)
+			draw.NonoToJPG(nono, table.dest)
 			fmt.Println("Successfully generated file", table.dest)
 		}
 	}

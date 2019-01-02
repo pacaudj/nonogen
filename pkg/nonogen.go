@@ -1,13 +1,13 @@
-package main
+package pkg
 
 import (
 	"fmt"
+	"github.com/shadonovitch/nonogen/pkg/draw"
 	"image"
 	"image/jpeg"
 	"os"
-	"strconv"
 )
-
+/*
 func main() {
 	if len(os.Args) < 4 {
 		fmt.Println("Usage: nonogen size brightness source (dest)")
@@ -24,7 +24,7 @@ func main() {
 		return
 	}
 	fileName := os.Args[3]
-	nono, err := nonoGen(size, brightness, fileName)
+	nono, err := Nonogen(size, brightness, fileName)
 	if err != nil {
 		return
 	}
@@ -35,9 +35,9 @@ func main() {
 	nonoToJPG(nono, "test_nono.jpg")
 	serializedNono, err := serializeNono(nono)
 	isSolvable(serializedNono)
-}
+}*/
 
-func nonoGen(sizeY, brightness int, name string) ([][]int, error) {
+func Nonogen(sizeY, brightness int, name string) ([][]int, error) {
 	img, err := os.Open(name)
 	if err != nil {
 		fmt.Println("Error while opening file, file doesn't exist.")
@@ -48,11 +48,11 @@ func nonoGen(sizeY, brightness int, name string) ([][]int, error) {
 		fmt.Println("Error while opening file, wrong format (jpg/jpeg only).")
 		return nil, err
 	}
-	originImg, err = resizeImg(originImg, sizeY)
+	originImg, err = draw.ResizeImg(originImg, sizeY)
 	if err != nil {
 		return nil, err
 	}
-	BWImg := imgToGrayScale(originImg)
+	BWImg := draw.ImgToGrayScale(originImg)
 	bounds := BWImg.Bounds()
 	sizeX := bounds.Max.X / (bounds.Max.Y / sizeY)
 	sqrSize := bounds.Max.Y / sizeY
