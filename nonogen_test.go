@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/pacaud_j/nonogen"
+	"github.com/pacaudj/nonogen"
 )
 
 func TestErrorCaseNonogen(b *testing.T) {

@@ -1,4 +1,4 @@
-module github.com/pacaud_j
+module github.com/pacaudj/nonogen
 
 go 1.16
 
