@@ -1,15 +1,15 @@
-package main
+package nonogen
 
 import "fmt"
 
-func isSolvable(tips [2][][]int) {
+func IsSolvable(tips [2][][]int) {
 	grid := make([][]int, len(tips[0]))
 	for i := range grid {
 		grid[i] = make([]int, len(tips[1]))
 	}
 	grid = mathPrefill(tips[0], len(tips[1]), grid)
 	grid = rotateGrid(mathPrefill(tips[1], len(tips[0]), rotateGrid(grid)))
-	nonoToJPG(grid, "test_solver.jpg")
+	NonoToJPG(grid, "test_solver.jpg")
 }
 
 func rotateGrid(grid [][]int) [][]int {

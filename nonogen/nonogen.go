@@ -1,43 +1,13 @@
-package main
+package nonogen
 
 import (
 	"fmt"
 	"image"
 	"image/jpeg"
 	"os"
-	"strconv"
 )
 
-func main() {
-	if len(os.Args) < 4 {
-		fmt.Println("Usage: nonogen size brightness source (dest)")
-		os.Exit(1)
-	}
-	size, err := strconv.Atoi(os.Args[1])
-	if err != nil {
-		fmt.Println("Usage: nonogen size brightness source (dest)")
-		return
-	}
-	brightness, err := strconv.Atoi(os.Args[2])
-	if err != nil {
-		fmt.Println("Usage: nonogen size brightness source (dest)")
-		return
-	}
-	fileName := os.Args[3]
-	nono, err := nonoGen(size, brightness, fileName)
-	if err != nil {
-		return
-	}
-	if len(os.Args) >= 5 {
-		destName := os.Args[4]
-		nonoToJPG(nono, destName)
-	}
-	nonoToJPG(nono, "test_nono.jpg")
-	serializedNono, err := serializeNono(nono)
-	isSolvable(serializedNono)
-}
-
-func nonoGen(sizeY, brightness int, name string) ([][]int, error) {
+func NonoGen(sizeY, brightness int, name string) ([][]int, error) {
 	img, err := os.Open(name)
 	if err != nil {
 		fmt.Println("Error while opening file, file doesn't exist.")
@@ -83,7 +53,7 @@ func getSqrAvgColor(x, y, size int, img image.RGBA) int {
 	return int(avgColor)
 }
 
-func serializeNono(tab [][]int) ([2][][]int, error) {
+func SerializeNono(tab [][]int) ([2][][]int, error) {
 	row := make([][]int, len(tab))
 	column := make([][]int, len(tab[0]))
 	for i := range tab {

@@ -1,30 +1,31 @@
-package main
+package nonogen
 
 import (
 	"errors"
 	"fmt"
-	"github.com/nfnt/resize"
 	"image"
 	"image/color"
 	"image/jpeg"
 	"os"
+
+	"github.com/nfnt/resize"
 )
 
-func DrawLine(x1, x2, y int, img image.RGBA, color color.Color) {
+func drawLine(x1, x2, y int, img image.RGBA, color color.Color) {
 	for ; x1 < x2; x1++ {
 		img.Set(x1, y, color)
 	}
 }
 
-func DrawVerticalLine(y1, y2, x int, img image.RGBA, color color.Color) {
+func drawVerticalLine(y1, y2, x int, img image.RGBA, color color.Color) {
 	for ; y1 < y2; y1++ {
 		img.Set(x, y1, color)
 	}
 }
 
-func DrawRect(x, y, x2, y2 int, img image.RGBA, color color.Color) {
+func drawRect(x, y, x2, y2 int, img image.RGBA, color color.Color) {
 	for ; y < y2; y++ {
-		DrawLine(x, x2, y, img, color)
+		drawLine(x, x2, y, img, color)
 	}
 }
 
@@ -41,7 +42,7 @@ func imgToGrayScale(originImg image.Image) *image.RGBA {
 	return BWImg
 }
 
-func nonoToJPG(nono [][]int, name string) {
+func NonoToJPG(nono [][]int, name string) {
 	size := 10
 	sizeY := len(nono)
 	sizeX := len(nono[0])
@@ -49,22 +50,22 @@ func nonoToJPG(nono [][]int, name string) {
 	for y := 0; y < sizeY; y++ {
 		for x := 0; x < sizeX; x++ {
 			if nono[y][x] == 1 {
-				DrawRect(x*size, y*size, x*size+size, y*size+size, *img, color.Black)
+				drawRect(x*size, y*size, x*size+size, y*size+size, *img, color.Black)
 			} else {
-				DrawRect(x*size, y*size, x*size+size, y*size+size, *img, color.White)
+				drawRect(x*size, y*size, x*size+size, y*size+size, *img, color.White)
 			}
 		}
 	}
 	for i := 1; i < sizeY; i++ {
-		DrawLine(0, size*sizeX, i*size, *img, color.RGBA{255, 0, 0, 1})
+		drawLine(0, size*sizeX, i*size, *img, color.RGBA{255, 0, 0, 1})
 	}
 	for i := 1; i < sizeX; i++ {
-		DrawVerticalLine(0, size*sizeY, i*size, *img, color.RGBA{255, 0, 0, 1})
+		drawVerticalLine(0, size*sizeY, i*size, *img, color.RGBA{255, 0, 0, 1})
 	}
-	jpgDraw(name, img)
+	JpgDraw(name, img)
 }
 
-func jpgDraw(name string, img image.Image) {
+func JpgDraw(name string, img image.Image) {
 	var opt jpeg.Options
 	opt.Quality = 75
 	out, err := os.Create(name)
